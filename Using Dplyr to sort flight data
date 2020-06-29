@@ -1,0 +1,12 @@
+install.packages("nycflights13")
+install.packages("tidyverse")
+library("dplyr")
+
+nycflights13::flights
+filter(flights, month == 1, day == 1)
+filter(flights, flights$arr_delay  > 2 |  flights$dep_delay < 2)
+filter(flights, arr_delay > 120 | dep_delay < 120)
+filter(flights, dep_time == "NA")
+flight_sml <- select(flights, year:day, ends_with("delay"), distance, air_time)
+by_day <- group_by(flights, year, month, day)
+summarize(by_day, delay = mean (dep_delay,na.rm = TRUE))
